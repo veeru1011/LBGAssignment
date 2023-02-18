@@ -32,7 +32,14 @@ public protocol ResponseRequestable: URLCompatible {
 extension URLCompatible {
         
     public func getUrlRequest() throws -> URLRequest {
-        var components = URLComponents(string: APIConstants.apiURL + self.path)
+        var baseURL = URL(string: APIConstants.apiURL)!
+        if let pathUrl = URL(string: self.path) {
+            baseURL = pathUrl
+        }
+        else {
+            baseURL.appendPathComponent(self.path)
+        }
+        var components = URLComponents(string: baseURL.absoluteString)
         components?.queryItems = [URLQueryItem]()
         components?.queryItems?.append(contentsOf: [
             URLQueryItem(name: "client_id", value: APIConstants.clientID)])

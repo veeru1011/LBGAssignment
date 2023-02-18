@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0441214129A0BC2B00ACDC11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441214029A0BC2B00ACDC11 /* ViewController.swift */; };
 		0441214329A0BEF200ACDC11 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441214229A0BEF200ACDC11 /* EndPoint.swift */; };
+		0441214729A0BFF200ACDC11 /* GetEventUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441214629A0BFF200ACDC11 /* GetEventUseCase.swift */; };
+		0441214A29A0C09300ACDC11 /* Event+Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441214929A0C09300ACDC11 /* Event+Mock.swift */; };
+		0441214C29A0D36C00ACDC11 /* NetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441214B29A0D36C00ACDC11 /* NetworkServiceTests.swift */; };
+		0441214E29A0DB7900ACDC11 /* DataTransferServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441214D29A0DB7900ACDC11 /* DataTransferServiceTests.swift */; };
 		0486D855299DA7D500C05403 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486D854299DA7D500C05403 /* AppDelegate.swift */; };
 		0486D857299DA7D500C05403 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486D856299DA7D500C05403 /* SceneDelegate.swift */; };
 		0486D85C299DA7D600C05403 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486D85A299DA7D600C05403 /* Main.storyboard */; };
@@ -50,6 +54,10 @@
 /* Begin PBXFileReference section */
 		0441214029A0BC2B00ACDC11 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0441214229A0BEF200ACDC11 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		0441214629A0BFF200ACDC11 /* GetEventUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEventUseCase.swift; sourceTree = "<group>"; };
+		0441214929A0C09300ACDC11 /* Event+Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+Mock.swift"; sourceTree = "<group>"; };
+		0441214B29A0D36C00ACDC11 /* NetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTests.swift; sourceTree = "<group>"; };
+		0441214D29A0DB7900ACDC11 /* DataTransferServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferServiceTests.swift; sourceTree = "<group>"; };
 		0486D851299DA7D500C05403 /* LBGAssignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LBGAssignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0486D854299DA7D500C05403 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0486D856299DA7D500C05403 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +108,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0441214829A0C07200ACDC11 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				0441214929A0C09300ACDC11 /* Event+Mock.swift */,
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
 		0486D848299DA7D500C05403 = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +155,10 @@
 			isa = PBXGroup;
 			children = (
 				0486D86B299DA7D900C05403 /* LBGAssignmentTests.swift */,
+				0441214629A0BFF200ACDC11 /* GetEventUseCase.swift */,
+				0441214B29A0D36C00ACDC11 /* NetworkServiceTests.swift */,
+				0441214D29A0DB7900ACDC11 /* DataTransferServiceTests.swift */,
+				0441214829A0C07200ACDC11 /* MockData */,
 			);
 			path = LBGAssignmentTests;
 			sourceTree = "<group>";
@@ -460,7 +480,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0441214A29A0C09300ACDC11 /* Event+Mock.swift in Sources */,
 				0486D86C299DA7D900C05403 /* LBGAssignmentTests.swift in Sources */,
+				0441214C29A0D36C00ACDC11 /* NetworkServiceTests.swift in Sources */,
+				0441214E29A0DB7900ACDC11 /* DataTransferServiceTests.swift in Sources */,
+				0441214729A0BFF200ACDC11 /* GetEventUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

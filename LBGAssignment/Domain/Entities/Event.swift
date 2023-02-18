@@ -11,7 +11,11 @@ struct Events {
     let list:[Event]?
 }
 
-struct Event {
+struct Event : Equatable {
+    static func == (lhs: Event, rhs: Event) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     let type: String?
     let title:String?
     let id:Int?
