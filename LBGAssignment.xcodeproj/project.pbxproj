@@ -32,7 +32,6 @@
 		0486D85C299DA7D600C05403 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486D85A299DA7D600C05403 /* Main.storyboard */; };
 		0486D85E299DA7D900C05403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0486D85D299DA7D900C05403 /* Assets.xcassets */; };
 		0486D861299DA7D900C05403 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486D85F299DA7D900C05403 /* LaunchScreen.storyboard */; };
-		0486D86C299DA7D900C05403 /* LBGAssignmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486D86B299DA7D900C05403 /* LBGAssignmentTests.swift */; };
 		0486D876299DA7D900C05403 /* LBGAssignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486D875299DA7D900C05403 /* LBGAssignmentUITests.swift */; };
 		0486D878299DA7D900C05403 /* LBGAssignmentUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486D877299DA7D900C05403 /* LBGAssignmentUITestsLaunchTests.swift */; };
 		0486D895299DC94000C05403 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486D894299DC94000C05403 /* APIConstants.swift */; };
@@ -94,7 +93,6 @@
 		0486D860299DA7D900C05403 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0486D862299DA7D900C05403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0486D867299DA7D900C05403 /* LBGAssignmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LBGAssignmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0486D86B299DA7D900C05403 /* LBGAssignmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBGAssignmentTests.swift; sourceTree = "<group>"; };
 		0486D871299DA7D900C05403 /* LBGAssignmentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LBGAssignmentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0486D875299DA7D900C05403 /* LBGAssignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBGAssignmentUITests.swift; sourceTree = "<group>"; };
 		0486D877299DA7D900C05403 /* LBGAssignmentUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBGAssignmentUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -278,7 +276,6 @@
 		0486D86A299DA7D900C05403 /* LBGAssignmentTests */ = {
 			isa = PBXGroup;
 			children = (
-				0486D86B299DA7D900C05403 /* LBGAssignmentTests.swift */,
 				0441216929A1421700ACDC11 /* Domain */,
 				0441216C29A1428400ACDC11 /* Presentation */,
 				0441216A29A1423900ACDC11 /* Infrastructure */,
@@ -624,7 +621,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0441214A29A0C09300ACDC11 /* Event+Mock.swift in Sources */,
-				0486D86C299DA7D900C05403 /* LBGAssignmentTests.swift in Sources */,
 				0441214C29A0D36C00ACDC11 /* NetworkServiceTests.swift in Sources */,
 				0441216E29A142E800ACDC11 /* EventListViewModelTests.swift in Sources */,
 				0441214E29A0DB7900ACDC11 /* DataTransferServiceTests.swift in Sources */,
