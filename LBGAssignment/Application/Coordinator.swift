@@ -34,7 +34,8 @@ class AppCoordinator: Coordinator {
     }
     
     func navigateToEventDetails(_ event: Event) {
-        let vc = EventDetailViewController.loadVC(with: event, coodinator: self)
+        let eventDetailViewModel = EventDetailViewModel(event)
+        let vc = EventDetailViewController.loadVC(with: eventDetailViewModel, coodinator: self)
         navigationController?.pushViewController(vc, animated: true)
     }
     /// setUp App

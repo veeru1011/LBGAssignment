@@ -15,22 +15,7 @@ class EventViewCell: UITableViewCell {
     @IBOutlet private var venueLabel: UILabel!
     @IBOutlet private var timeLabel: UILabel!
     
-    
-    var event: Event? {
-        didSet {
-            self.titleLabel.text  = ""
-            self.venueLabel.text  = ""
-            self.timeLabel.text  = ""
-            self.eventImageView.image = nil
-            guard let e = event else { return }
-            if let title = e.title {
-                titleLabel.text = title
-                venueLabel.text = e.venue?.displayLocation
-                timeLabel.text = e.getEventTiming()
-                //self.eventImageView.sd_setImage(with: URL(string: e.getImageURLString()), placeholderImage: #imageLiteral(resourceName: "placeholder"))
-            }
-        }
-    }
+    var viewModel: EventViewCellViewModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -53,8 +38,31 @@ class EventViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
+    func configure(_ event: Event?,viewModel: EventViewCellViewModel) {
+        self.viewModel = viewModel
+        self.titleLabel.text  = ""
+        self.venueLabel.text  = ""
+        self.timeLabel.text  = ""
+        self.eventImageView.image = nil
+        guard let e = event else { return }
+        if let title = e.title {
+            titleLabel.text = title
+            venueLabel.text = e.venue?.displayLocation
+            timeLabel.text = e.getEventTiming()
+            self.setUpEventImage(event: e)
+        }
+    }
+    
+    private func setUpEventImage(event: Event) {
+        guard let imageURL = event.eventImageURL() else { return }
+        Task {
+            do {
+                self.eventImageView.image = try await self.viewModel?.loadImage(for: imageURL)
+            } catch {
+                self.eventImageView.image = UIImage(named: "ProductPlaceholder")
+            }
+        }
+    }
 }

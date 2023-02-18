@@ -31,6 +31,18 @@ struct Event : Equatable {
             return nil
         }
     }
+    
+    func eventImageURL() -> URL?  {
+        if let performers = performers,
+            let first = performers.first,
+            let image = first.image,
+            let imgURL = URL(string: image) {
+            return imgURL
+        }
+        else {
+            return nil
+        }
+    }
 }
 
 struct Venue {

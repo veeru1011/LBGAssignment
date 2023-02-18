@@ -24,6 +24,9 @@ class EventListViewController: UIViewController {
     
     ///ActivityIndicator object connect to IBOutlet
     @IBOutlet weak var activityIndicater: UIActivityIndicatorView!
+   
+    ///UIRefreshControl
+    private var refreshControl: UIRefreshControl!
     
     ///View Model
     var viewModel: EventListViewModel!
@@ -33,32 +36,36 @@ class EventListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Events"
-        self.setUpTableView()
+        self.setupViews()
         bindUIwithViewModel()
-        
         viewModel.getEvents()
         
         // Do any additional setup after loading the view.
     }
     
-    // MARK: - UI Helper
+    // MARK: - Private UI Helper
+
+    private func setupViews() {
+        title = viewModel.screenTitle
+        self.setUpTableView()
+        self.setUpRefreshControl()
+    }
+    
     ///  Set up setUpTableView
-    func setUpTableView() {
-        
+    private func setUpTableView() {
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0.01))
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
         tableView.registerClass(EventViewCell.self)
     }
     
-    func bindUIwithViewModel() {
+    private func bindUIwithViewModel() {
         bindDataSource()
         bindActivityIndicator()
         bindErrorHandle()
     }
     
-    func bindDataSource() {
+    private func bindDataSource() {
         viewModel?.$events
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
@@ -66,7 +73,7 @@ class EventListViewController: UIViewController {
             }.store(in: &cancellables)
     }
     
-    func bindActivityIndicator() {
+    private func bindActivityIndicator() {
         viewModel?.$isLoading
             .receive(on: DispatchQueue.main)
             .sink { [weak self] loading in
@@ -74,7 +81,7 @@ class EventListViewController: UIViewController {
             }.store(in: &cancellables)
     }
     
-    func bindErrorHandle() {
+    private func bindErrorHandle() {
         viewModel?.$error
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
@@ -84,10 +91,23 @@ class EventListViewController: UIViewController {
             }.store(in: &cancellables)
     }
     
-    func updateUI() {
+    private func setUpRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .black
+        refreshControl.attributedTitle = NSAttributedString(string: "")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+    }
+    
+    private func updateUI() {
         DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
             self.tableView.reloadData()
         }
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        viewModel.refresh()
     }
     
 }
@@ -101,8 +121,8 @@ extension EventListViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(EventViewCell.self, indexPath: indexPath)
-        let locData = self.viewModel.getItemAtIndex(indexPath.row)
-        cell.event = locData
+        let event = self.viewModel.getItemAtIndex(indexPath.row)
+        cell.configure(event, viewModel: EventViewCellViewModel())
         return cell
     }
     
