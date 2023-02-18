@@ -22,6 +22,15 @@ struct Event : Equatable {
     let datetime:String?
     let venue:Venue?
     let performers:[Performer]?
+    
+    func getEventTiming() -> String? {
+        if let dt = datetime {
+            return dt.longFormatDateText()
+        }
+        else {
+            return nil
+        }
+    }
 }
 
 struct Venue {

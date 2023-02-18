@@ -8,14 +8,14 @@
 import XCTest
 @testable import LBGAssignment
 
-class GetEventUseCase: XCTestCase {
+class GetEventUseCaseTests: XCTestCase {
     
     static let events : Events = {
         Events(list: [Event.getDummy(1),Event.getDummy(2),Event.getDummy(3)])
     }()
     
     class EventsRepositoryMock : EventsRepository {
-        var events: Events = GetEventUseCase.events
+        var events: Events = GetEventUseCaseTests.events
         func fetchEvents(completion: @escaping (Result<Events, Error>) -> Void) {
             completion(.success(events))
         }

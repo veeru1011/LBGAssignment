@@ -12,10 +12,24 @@ final class EventListViewModel {
 
     private let getEventUseCase: GetEventUseCase
     @Published var events: [Event] = []
-    @Published var error: String = ""
+    @Published var error: String? = nil
+    @Published var isLoading : Bool = false
 
     // MARK: - OUTPUT
     var isEmpty: Bool { return events.isEmpty }
+    
+    func numberOfRowsInSection() -> Int {
+        return events.count
+    }
+    
+    func getItemAtIndex(_ index:Int) -> Event?  {
+        if events.count > index {
+            return events[index]
+        }
+        else {
+            return nil
+        }
+    }
 
     // MARK: - Init
 
@@ -34,6 +48,7 @@ final class EventListViewModel {
     }
 
     func getEvents() {
+        self.isLoading = true
         getEventUseCase.execute { result in
             switch result {
             case .success(let page):
@@ -41,6 +56,7 @@ final class EventListViewModel {
             case .failure(let error):
                 self.error = error.localizedDescription
             }
+            self.isLoading = false
         }
     }
 }
