@@ -69,12 +69,7 @@ extension EventListViewModel : EventListViewModelAction {
     }
     
     func getItemAtIndex(_ index:Int) -> Event?  {
-        if events.count > index {
-            return events[index]
-        }
-        else {
-            return nil
-        }
+        return events.count > index ? events[index] : nil
     }
     
     private func handle(error: Error) {

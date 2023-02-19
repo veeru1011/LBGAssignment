@@ -1,0 +1,115 @@
+{
+  "events": [
+    {
+      "type": "sports",
+      "id": 5887955,
+      "datetime_utc": "2023-02-19T02:30:00",
+      "venue": {
+        "state": null,
+        "name_v2": "Hallenstadion",
+        "postal_code": "8050",
+        "name": "Hallenstadion",
+        "links": [
+          
+        ],
+        "timezone": "Europe/Stockholm",
+        "url": "https://seatgeek.com/venues/hallenstadion-5/tickets",
+        "score": 0.443575,
+        "location": {
+          "lat": 47.411,
+          "lon": 8.55008
+        },
+        "address": "Wallisellenstrasse 45",
+        "country": "Switzerland",
+        "has_upcoming_events": true,
+        "num_upcoming_events": 2,
+        "city": "Zurich",
+        "slug": "hallenstadion-5",
+        "extended_address": "Zurich, Switzerland",
+        "id": 7229,
+        "popularity": 0,
+        "access_method": null,
+        "metro_code": 0,
+        "capacity": 0,
+        "display_location": "Zurich, Switzerland"
+      },
+      "datetime_tbd": false,
+      "performers": [
+        {
+          "type": "sports",
+          "name": "Michael Buble",
+          "image": "https://seatgeek.com/images/performers-landscape/michael-buble-1-d08eb8/792381/huge.jpg"
+        }
+      ],
+      "datetime_local": "2023-02-19T03:30:00",
+      "time_tbd": true,
+      "short_title": "Michael Buble",
+      "visible_until_utc": "2023-02-19T23:00:00",
+      "url": "https://seatgeek.com/michael-buble-tickets/sport/2023-02-19-3-30-am/5887955",
+      "score": 0,
+      "announce_date": "2022-12-04T00:00:00",
+      "created_at": "2022-12-04T16:01:57",
+      "date_tbd": false,
+      "title": "Michael Buble",
+      "popularity": 0,
+      "description": "",
+      "status": "normal",
+    },
+    {
+      "type": "concert",
+      "id": 5903342,
+      "datetime_utc": "2023-02-19T08:30:00",
+      "venue": {
+        "state": "NY",
+        "name_v2": "Joe's Pub",
+        "postal_code": "10003",
+        "name": "Joe's Pub",
+        "links": [
+          
+        ],
+        "timezone": "America/New_York",
+        "url": "https://seatgeek.com/venues/joe-s-pub/tickets",
+        "score": 0.33,
+        "location": {
+          "lat": 40.729,
+          "lon": -73.9918
+        },
+        "address": "425 Lafayette Street",
+        "country": "US",
+        "has_upcoming_events": true,
+        "num_upcoming_events": 4,
+        "city": "New York",
+        "slug": "joe-s-pub",
+        "extended_address": "New York, NY 10003",
+        "id": 2124,
+        "popularity": 0,
+        "access_method": null,
+        "metro_code": 501,
+        "capacity": 184,
+        "display_location": "New York, NY"
+      },
+      "datetime_tbd": false,
+      "performers": [
+        {
+          "type": "band",
+          "name": "John Cameron Mitchell",
+          "image": "https://seatgeek.com/images/performers-landscape/john-cameron-mitchell-c7d528/39034/huge.jpg",
+        }
+      ],
+      "datetime_local": "2023-02-19T03:30:00",
+      "time_tbd": true,
+      "short_title": "John Cameron Mitchell",
+      "visible_until_utc": "2023-02-20T05:00:00",
+      "url": "https://seatgeek.com/john-cameron-mitchell-tickets/new-york-new-york-joe-s-pub-2023-02-19-3-30-am/concert/5903342",
+      "score": 0.433,
+      "created_at": "2022-12-26T16:02:28",
+      "date_tbd": false,
+      "title": "John Cameron Mitchell",
+      "popularity": 0.759,
+      "description": "",
+      "status": "normal",
+      "conditional": false,
+      "enddatetime_utc": null,
+    }
+  ]
+}

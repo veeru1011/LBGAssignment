@@ -11,7 +11,6 @@ import UIKit
 protocol Coordinator {
     var navigationController: UINavigationController? { get set }
     func setUpInitialNavigationController() -> UINavigationController
-    func navigateToPreviousController()
     func navigateToEventDetails(_ event: Event)
 }
 
@@ -27,10 +26,6 @@ class AppCoordinator: Coordinator {
         let vc = EventListViewController.loadVC(with: EventListViewModel(getEventUseCase: makeEventUseCase()), coodinator: self)
         navigationController = UINavigationController(rootViewController: vc)
         return navigationController!
-    }
-    
-    func navigateToPreviousController() {
-        navigationController?.popViewController(animated: true)
     }
     
     func navigateToEventDetails(_ event: Event) {

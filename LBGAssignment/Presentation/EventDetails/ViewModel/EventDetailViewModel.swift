@@ -12,7 +12,23 @@ class EventDetailViewModel {
     init(_ event: Event) {
         self.event = event
     }
-    func loadImage(for imageURL: URL) async throws -> UIImage {
-        return try await ImageLoader.shared.loadImage(for: imageURL)
+    func loadEventImage() async throws -> UIImage {
+        if let imageURL = event.eventImageURL() {
+            return try await ImageLoader.shared.loadImage(for: imageURL)
+        }
+        else {
+            return UIImage(named: "placeholder") ?? UIImage()
+        }
+    }
+    
+    func getEventTitle() -> String? {
+        event.title
+    }
+    func getVenueLocation() -> String? {
+        event.venue?.displayLocation
+    }
+    
+    func getEventTiming() -> String? {
+        event.getEventTiming()
     }
 }

@@ -9,13 +9,13 @@ import UIKit
 
 class EventViewCell: UITableViewCell {
     
-    @IBOutlet private var mainContainer: UIView!
-    @IBOutlet private var eventImageView: UIImageView!
-    @IBOutlet private var titleLabel: UILabel!
-    @IBOutlet private var venueLabel: UILabel!
-    @IBOutlet private var timeLabel: UILabel!
+    @IBOutlet weak private var mainContainer: UIView!
+    @IBOutlet weak private var eventImageView: UIImageView!
+    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var venueLabel: UILabel!
+    @IBOutlet weak private var timeLabel: UILabel!
     
-    var viewModel: EventViewCellViewModel?
+    private var viewModel: EventViewCellViewModel?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,7 +61,7 @@ class EventViewCell: UITableViewCell {
             do {
                 self.eventImageView.image = try await self.viewModel?.loadImage(for: imageURL)
             } catch {
-                self.eventImageView.image = UIImage(named: "ProductPlaceholder")
+                self.eventImageView.image = UIImage(named: "placeholder")
             }
         }
     }

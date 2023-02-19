@@ -93,4 +93,20 @@ class NetworkServiceTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 0.1)
     }
+    
+    func test_whenhasStatusCodeUsedWithWrongError_shouldReturnFalse() {
+        //when
+        let sut = NetworkError.notConnected
+        //then
+        XCTAssertFalse(sut.hasStatusCode(200))
+    }
+
+    func test_whenhasStatusCodeUsed_shouldReturnCorrectStatusCode_() {
+        //when
+        let sut = NetworkError.error(statusCode: 400, data: nil)
+        //then
+        XCTAssertTrue(sut.hasStatusCode(400))
+        XCTAssertFalse(sut.hasStatusCode(399))
+        XCTAssertFalse(sut.hasStatusCode(401))
+    }
 }

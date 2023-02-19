@@ -20,19 +20,19 @@ class EventListViewController: UIViewController {
     }
     
     ///tableview object connect to IBOutlet
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak private var tableView: UITableView!
     
     ///ActivityIndicator object connect to IBOutlet
-    @IBOutlet weak var activityIndicater: UIActivityIndicatorView!
+    @IBOutlet weak private var activityIndicater: UIActivityIndicatorView!
    
     ///UIRefreshControl
     private var refreshControl: UIRefreshControl!
     
     ///View Model
-    var viewModel: EventListViewModel!
+    private var viewModel: EventListViewModel!
     
     ///Coordinator
-    var coordinator: Coordinator!
+    private var coordinator: Coordinator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +55,7 @@ class EventListViewController: UIViewController {
     private func setUpTableView() {
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 0.01))
         tableView.estimatedRowHeight = 100
+        tableView.accessibilityIdentifier = AccessibilityIdentifier.eventTableView
         tableView.rowHeight = UITableView.automaticDimension
         tableView.registerClass(EventViewCell.self)
     }
@@ -106,7 +107,7 @@ class EventListViewController: UIViewController {
         }
     }
     
-    @objc func refresh(_ sender: AnyObject) {
+    @objc private func refresh(_ sender: AnyObject) {
         viewModel.refresh()
     }
     

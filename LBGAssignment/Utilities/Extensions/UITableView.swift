@@ -14,11 +14,6 @@ public extension UITableView {
         self.register(UINib(nibName: className!, bundle: bundle), forCellReuseIdentifier: className!)
     }
     
-    func dequeue<T>(_ myclass:T.Type) -> T where T:UITableViewCell {
-        let className = NSStringFromClass(myclass).components(separatedBy: ".").last
-        return self.dequeueReusableCell(withIdentifier: className!) as! T
-    }
-    
     func dequeue<T>(_ cellType:T.Type,indexPath:IndexPath) -> T where T:UITableViewCell {
         let className = NSStringFromClass(cellType).components(separatedBy: ".").last
         return self.dequeueReusableCell(withIdentifier: className!, for: indexPath) as! T

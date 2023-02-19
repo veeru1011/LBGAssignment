@@ -19,3 +19,8 @@ public enum AlertViewVariables: String {
     case cancel = "cancel"
     case ok = "ok"
 }
+
+public struct AccessibilityIdentifier {
+    static let eventTableView = "eventTableView"
+    static let eventDetailsView = "eventDetailsView"
+}

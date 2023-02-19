@@ -25,10 +25,10 @@ class EventDetailViewController: UIViewController {
     @IBOutlet weak var eventImageView: UIImageView!
     
     /// Set event model for display data in this detailview
-    var viewModel: EventDetailViewModel?
+    private var viewModel: EventDetailViewModel?
     
     ///Coordinator
-    var coordinator: Coordinator!
+    private var coordinator: Coordinator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,22 +37,22 @@ class EventDetailViewController: UIViewController {
     }
     
     /** set up UI and display data for event*/
-    func setupUI() {
-        if let event = viewModel?.event {
-            self.titleLabel.text = event.title
-            self.venueLabel.text = event.venue?.displayLocation
-            timeLabel.text = event.getEventTiming()
+    private func setupUI() {
+        if let viewModel = viewModel {
+            self.titleLabel.text = viewModel.getEventTitle()
+            self.venueLabel.text = viewModel.getVenueLocation()
+            timeLabel.text = viewModel.getEventTiming()
             self.setUpEventImage()
         }
+        view.accessibilityIdentifier = AccessibilityIdentifier.eventDetailsView
     }
     
     private func setUpEventImage() {
-        guard let imageURL = viewModel?.event.eventImageURL() else { return }
         Task {
             do {
-                self.eventImageView.image = try await self.viewModel?.loadImage(for: imageURL)
+                self.eventImageView.image =  try await self.viewModel?.loadEventImage()
             } catch {
-                self.eventImageView.image = UIImage(named: "ProductPlaceholder")
+                self.eventImageView.image = UIImage(named: "placeholder")
             }
         }
     }

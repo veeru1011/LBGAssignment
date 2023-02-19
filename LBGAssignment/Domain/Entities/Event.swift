@@ -24,24 +24,15 @@ struct Event : Equatable {
     let performers:[Performer]?
     
     func getEventTiming() -> String? {
-        if let dt = datetime {
-            return dt.longFormatDateText()
-        }
-        else {
-            return nil
-        }
+        datetime?.longFormatDateText()
     }
     
     func eventImageURL() -> URL?  {
-        if let performers = performers,
-            let first = performers.first,
-            let image = first.image,
-            let imgURL = URL(string: image) {
-            return imgURL
-        }
-        else {
-            return nil
-        }
+        guard let performers = performers,
+              let first = performers.first,
+              let image = first.image,
+              let imgURL = URL(string: image) else { return nil }
+        return imgURL
     }
 }
 
