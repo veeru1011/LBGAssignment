@@ -14,7 +14,7 @@ protocol Coordinator {
     func navigateToEventDetails(_ event: Event)
 }
 
-class AppCoordinator: Coordinator {
+final class AppCoordinator: Coordinator {
         
     var navigationController: UINavigationController?
     

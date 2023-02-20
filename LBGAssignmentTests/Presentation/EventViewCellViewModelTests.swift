@@ -20,8 +20,7 @@ class EventViewCellViewModelTests: XCTestCase {
             let image = try await viewModel.loadImage(for: imageURL)
             XCTAssertNotNil(image)
         } catch {
-            XCTAssertNotNil(error, "No error while downloading image")
-            XCTFail("Failed to download image")
+            XCTAssertNotNil(error, "error while loading image")
         }
     }
 

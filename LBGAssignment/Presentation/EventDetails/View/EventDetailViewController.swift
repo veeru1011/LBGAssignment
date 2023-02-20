@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EventDetailViewController: UIViewController {
+final class EventDetailViewController: UIViewController {
 
     ///class function to get EventDetailViewController object from main Storyboard
     
@@ -19,10 +19,10 @@ class EventDetailViewController: UIViewController {
     }
         
     //MARK: IBOutlet Properties
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var venueLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var eventImageView: UIImageView!
+    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var venueLabel: UILabel!
+    @IBOutlet weak private var timeLabel: UILabel!
+    @IBOutlet weak private var eventImageView: UIImageView!
     
     /// Set event model for display data in this detailview
     private var viewModel: EventDetailViewModel?

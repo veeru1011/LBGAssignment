@@ -75,7 +75,7 @@ extension DefaultDataTransferService: DataTransferService {
 }
 
 // MARK: - Error Resolver
-public class DefaultDataTransferErrorResolver: DataTransferErrorResolver {
+public final class DefaultDataTransferErrorResolver: DataTransferErrorResolver {
     public init() { }
     public func resolve(error: NetworkError) -> Error {
         return error

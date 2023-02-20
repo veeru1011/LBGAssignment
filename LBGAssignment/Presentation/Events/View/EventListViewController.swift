@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class EventListViewController: UIViewController {
+final class EventListViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     

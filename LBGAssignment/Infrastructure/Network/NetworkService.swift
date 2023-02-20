@@ -80,7 +80,7 @@ extension DefaultNetworkService: NetworkService {
 
 // MARK: - Default Network Session Manager
 
-public class DefaultNetworkSessionManager: NetworkSessionManager {
+public final class DefaultNetworkSessionManager: NetworkSessionManager {
     public init() {}
     public func request(_ request: URLRequest,
                         completion: @escaping CompletionHandler) {

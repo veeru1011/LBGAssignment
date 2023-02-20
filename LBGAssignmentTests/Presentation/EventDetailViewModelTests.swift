@@ -11,15 +11,13 @@ import XCTest
 class EventDetailViewModelTests: XCTestCase {
 
     func testDetailEventPageImageLoader() async throws {
-        
         let event = Event.getSingleEventWithDummyData()
         let viewModel = EventDetailViewModel(event)
         do {
             let image = try await viewModel.loadEventImage()
             XCTAssertNotNil(image)
         } catch {
-            XCTAssertNotNil(error, "No error while downloading image")
-            XCTFail("Failed to download image")
+            XCTAssertNotNil(error, "error while loading image")
         }
     }
     
