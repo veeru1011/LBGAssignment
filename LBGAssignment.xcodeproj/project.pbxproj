@@ -35,6 +35,7 @@
 		0441218929A296E400ACDC11 /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441216729A0F7F500ACDC11 /* AppConstants.swift */; };
 		0441219029A3144100ACDC11 /* LBGAssignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441218F29A3144100ACDC11 /* LBGAssignmentUITests.swift */; };
 		0441219229A3145300ACDC11 /* LBGAssignmentUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0441219129A3145300ACDC11 /* LBGAssignmentUITestsLaunchTests.swift */; };
+		0441219429A3B9A100ACDC11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0486D85D299DA7D900C05403 /* Assets.xcassets */; };
 		0486D855299DA7D500C05403 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486D854299DA7D500C05403 /* AppDelegate.swift */; };
 		0486D857299DA7D500C05403 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486D856299DA7D500C05403 /* SceneDelegate.swift */; };
 		0486D85C299DA7D600C05403 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0486D85A299DA7D600C05403 /* Main.storyboard */; };
@@ -592,6 +593,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0441219429A3B9A100ACDC11 /* Assets.xcassets in Resources */,
 				0441218329A27D7500ACDC11 /* DummyJson.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

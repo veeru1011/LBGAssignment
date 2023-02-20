@@ -109,4 +109,51 @@ class NetworkServiceTests: XCTestCase {
         XCTAssertFalse(sut.hasStatusCode(399))
         XCTAssertFalse(sut.hasStatusCode(401))
     }
+    
+    func test_forErrorCode404() {
+        let sut = NetworkError.error(statusCode: 404, data: nil)
+        XCTAssertTrue(sut.isNotFoundError)
+    }
+    
+    func testForReturnErrorInNotConneted() {
+        let expectation = self.expectation(description: "return error")
+        let notConnectedError = NSError(domain: "network", code: NSURLErrorNotConnectedToInternet, userInfo: nil)
+        
+        let mockService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: nil, data: nil, error: notConnectedError))
+        
+        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com")) { result in
+            do {
+                _ = try result.get()
+                XCTFail("Should not happen")
+            } catch let error {
+                guard case NetworkError.notConnected = error else {
+                    XCTFail("NetworkError.notConnected not found")
+                    return
+                }
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func testForReturnErrorGenricError() {
+        let expectation = self.expectation(description: "return error")
+        let timeOut = NSError(domain: "network", code: NSURLErrorTimedOut, userInfo: nil)
+        
+        let mockService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: nil, data: nil, error: timeOut))
+        
+        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com")) { result in
+            do {
+                _ = try result.get()
+                XCTFail("Should not happen")
+            } catch let error {
+                guard case NetworkError.generic( _) = error else {
+                    XCTFail("NetworkError.generic not found")
+                    return
+                }
+                expectation.fulfill()
+            }
+        }
+        wait(for: [expectation], timeout: 0.1)
+    }
 }

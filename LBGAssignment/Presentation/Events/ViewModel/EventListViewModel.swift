@@ -16,7 +16,7 @@ protocol EventListViewModelAction {
 }
 
 final class EventListViewModel {
-    
+
     private let getEventUseCase: GetEventUseCase
     @Published var events: [Event] = []
     @Published var error: String? = nil
@@ -24,17 +24,17 @@ final class EventListViewModel {
     let screenTitle = "Events"
     
     // MARK: - Init
-    
+
     init(getEventUseCase: GetEventUseCase) {
         self.getEventUseCase = getEventUseCase
     }
-    
+
     // MARK: - Private
-    
+
     private func appendPage(_ events: [Event]) {
         self.events.append(contentsOf: events)
     }
-    
+
     private func resetEvents() {
         events.removeAll()
     }
@@ -81,9 +81,4 @@ extension EventListViewModel : EventListViewModelAction {
         }
         
     }
-}
-// MARK: - Private
-
-private extension Array where Element == Events {
-    var events: [Event] { flatMap { $0.list ?? [] } }
 }

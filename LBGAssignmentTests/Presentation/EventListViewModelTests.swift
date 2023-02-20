@@ -66,7 +66,7 @@ class EventListViewModelTests: XCTestCase {
         viewModel.getEvents()
         viewModel.refresh()
         XCTAssertEqual(viewModel.events.count, 3)
-        XCTAssertNotNil(viewModel.events[0].getEventTiming)
+        XCTAssertNotNil(viewModel.getItemAtIndex(0)?.getEventTiming)
         
         wait(for: [expectation], timeout: 5)
     }
