@@ -16,30 +16,25 @@ protocol EventListViewModelAction {
 }
 
 final class EventListViewModel {
-
+    
     private let getEventUseCase: GetEventUseCase
     @Published var events: [Event] = []
     @Published var error: String? = nil
     @Published var isLoading : Bool = false
     let screenTitle = "Events"
     
-
-    // MARK: - OUTPUT
-    var isEmpty: Bool { return events.isEmpty }
-
-
     // MARK: - Init
-
+    
     init(getEventUseCase: GetEventUseCase) {
         self.getEventUseCase = getEventUseCase
     }
-
+    
     // MARK: - Private
-
+    
     private func appendPage(_ events: [Event]) {
         self.events.append(contentsOf: events)
     }
-
+    
     private func resetEvents() {
         events.removeAll()
     }

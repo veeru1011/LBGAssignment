@@ -9,7 +9,7 @@ import XCTest
 @testable import LBGAssignment
 
 class EventDetailViewModelTests: XCTestCase {
-
+    
     func testDetailEventPageImageLoader() async throws {
         let event = Event.getSingleEventWithDummyData()
         let viewModel = EventDetailViewModel(event)
@@ -41,5 +41,5 @@ class EventDetailViewModelTests: XCTestCase {
         XCTAssertNotNil(viewModel.getEventTiming())
         
     }
-
+    
 }

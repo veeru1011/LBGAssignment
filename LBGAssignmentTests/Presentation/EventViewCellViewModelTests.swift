@@ -9,7 +9,7 @@ import XCTest
 @testable import LBGAssignment
 
 class EventViewCellViewModelTests: XCTestCase {
-
+    
     func testForLoadingImage() async {
         
         let event = Event.getSingleEventWithDummyData()
@@ -23,5 +23,5 @@ class EventViewCellViewModelTests: XCTestCase {
             XCTAssertNotNil(error, "error while loading image")
         }
     }
-
+    
 }

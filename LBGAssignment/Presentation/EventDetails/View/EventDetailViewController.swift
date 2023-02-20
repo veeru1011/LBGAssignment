@@ -8,7 +8,7 @@
 import UIKit
 
 final class EventDetailViewController: UIViewController {
-
+    
     ///class function to get EventDetailViewController object from main Storyboard
     
     static func loadVC(with viewModel: EventDetailViewModel, coodinator: Coordinator) -> EventDetailViewController {
@@ -17,7 +17,7 @@ final class EventDetailViewController: UIViewController {
         vc.coordinator = coodinator
         return vc
     }
-        
+    
     //MARK: IBOutlet Properties
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var venueLabel: UILabel!

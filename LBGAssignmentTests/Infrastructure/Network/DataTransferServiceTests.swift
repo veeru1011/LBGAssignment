@@ -13,14 +13,14 @@ private struct DummyModel: Decodable {
 }
 
 class DataTransferServiceTests: XCTestCase {
-
+    
     func testResponseDataDecodableToDummyObject() {
-
+        
         let expectation = self.expectation(description: "response in DummyModel ")
         let responseData = #"{"name": "Hello"}"#.data(using: .utf8)
         let networkService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: nil, data: responseData, error: nil))
         let dts = DefaultDataTransferService(with: networkService)
-
+        
         dts.request(with: Endpoint<DummyModel>(path: "http://mock.endpoint.com")) { result in
             do {
                 let object = try result.get()
@@ -30,17 +30,17 @@ class DataTransferServiceTests: XCTestCase {
                 XCTFail("Failed decoding MockObject")
             }
         }
-
+        
         wait(for: [expectation], timeout: 0.1)
     }
     
     func testForInValidResponse_DataNoDecodableToDummyObject() {
-
+        
         let expectation = self.expectation(description: "response in not proper format ")
         let responseData = #"{"age": 20}"#.data(using: .utf8)
         let networkService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: nil, data: responseData, error: nil))
         let dts = DefaultDataTransferService(with: networkService)
-
+        
         dts.request(with: Endpoint<DummyModel>(path: "http://mock.endpoint.com")) { result in
             do {
                 _ = try result.get()
@@ -79,5 +79,5 @@ class DataTransferServiceTests: XCTestCase {
         
         wait(for: [expectation], timeout: 0.1)
     }
-
+    
 }

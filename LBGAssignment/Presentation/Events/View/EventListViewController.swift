@@ -24,7 +24,7 @@ final class EventListViewController: UIViewController {
     
     ///ActivityIndicator object connect to IBOutlet
     @IBOutlet weak private var activityIndicater: UIActivityIndicatorView!
-   
+    
     ///UIRefreshControl
     private var refreshControl: UIRefreshControl!
     
@@ -44,7 +44,7 @@ final class EventListViewController: UIViewController {
     }
     
     // MARK: - Private UI Helper
-
+    
     private func setupViews() {
         title = viewModel.screenTitle
         self.setUpTableView()

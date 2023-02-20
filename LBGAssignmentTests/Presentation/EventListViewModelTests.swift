@@ -31,7 +31,7 @@ class EventListViewModelTests: XCTestCase {
             expectation?.fulfill()
         }
     }
-
+    
     func testEventsLoadwithThreeEvents() throws {
         
         let getEventUseCaseMock = GetEventUseCaseMock()

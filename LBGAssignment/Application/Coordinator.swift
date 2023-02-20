@@ -15,13 +15,13 @@ protocol Coordinator {
 }
 
 final class AppCoordinator: Coordinator {
-        
+    
     var navigationController: UINavigationController?
     
     init() {
         setupAppearance()
     }
-
+    
     func setUpInitialNavigationController() -> UINavigationController {
         let vc = EventListViewController.loadVC(with: EventListViewModel(getEventUseCase: makeEventUseCase()), coodinator: self)
         navigationController = UINavigationController(rootViewController: vc)

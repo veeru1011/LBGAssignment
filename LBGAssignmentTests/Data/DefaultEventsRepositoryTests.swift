@@ -9,10 +9,10 @@ import XCTest
 @testable import LBGAssignment
 
 class DefaultEventsRepositoryTests: XCTestCase {
-
+    
     class DefaultEventsRepositoryMock : EventsRepository {
         private let dataTransferService: DataTransferService
-
+        
         init(dataTransferService: DataTransferService) {
             self.dataTransferService = dataTransferService
         }
@@ -30,7 +30,7 @@ class DefaultEventsRepositoryTests: XCTestCase {
             }
         }
     }
-        
+    
     func testForDummyDataresponse() throws {
         let expectation = self.expectation(description: "response in not proper format ")
         let data = dataFrom(resource: "DummyJson.json")
@@ -50,14 +50,14 @@ class DefaultEventsRepositoryTests: XCTestCase {
         return Bundle(for: Helpers.self)
             .url(forResource: resourceName, withExtension: nil)!
     }
-
+    
     func dataFrom(resource: String) -> Data {
         let url = testURLForResource(resource)
         do {
             let data1 = try Data(contentsOf: url)
             return data1
         } catch { }
-
+        
         return Data()   // should never happen
     }
 }

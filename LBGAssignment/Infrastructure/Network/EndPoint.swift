@@ -30,7 +30,7 @@ public protocol ResponseRequestable: URLCompatible {
 }
 
 extension URLCompatible {
-        
+    
     public func getUrlRequest() throws -> URLRequest {
         var baseURL = URL(string: APIConstants.apiURL)!
         if let pathUrl = URL(string: self.path), pathUrl.host != nil {

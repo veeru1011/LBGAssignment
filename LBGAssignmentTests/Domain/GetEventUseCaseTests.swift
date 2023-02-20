@@ -25,18 +25,18 @@ class GetEventUseCaseTests: XCTestCase {
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-
+    
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
+    
     func testGetEventUseCase() throws {
         // given
         let expectation = self.expectation(description: "promise")
         expectation.expectedFulfillmentCount = 2
         let eventsRepositoryMock = EventsRepositoryMock()
         let useCase = DefaultGetEventUseCase(eventRepository: eventsRepositoryMock)
-
+        
         useCase.execute { _ in
             expectation.fulfill()
         }
@@ -48,5 +48,5 @@ class GetEventUseCaseTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
         XCTAssertTrue(eventList.contains(Event.getDummy(1)))
     }
-
+    
 }

@@ -100,7 +100,7 @@ class NetworkServiceTests: XCTestCase {
         //then
         XCTAssertFalse(sut.hasStatusCode(200))
     }
-
+    
     func test_whenhasStatusCodeUsed_shouldReturnCorrectStatusCode_() {
         //when
         let sut = NetworkError.error(statusCode: 400, data: nil)
