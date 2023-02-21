@@ -6,8 +6,15 @@
 //
 
 import UIKit
+import Combine
 
 final class EventViewCell: UITableViewCell {
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    static var identifier: String {
+        return String(describing: self)
+    }
     
     @IBOutlet weak private var mainContainer: UIView!
     @IBOutlet weak private var eventImageView: UIImageView!
@@ -40,29 +47,20 @@ final class EventViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func configure(_ event: Event?,viewModel: EventViewCellViewModel) {
-        self.viewModel = viewModel
-        self.titleLabel.text  = ""
-        self.venueLabel.text  = ""
-        self.timeLabel.text  = ""
+    func configure(_ event: Event) {
+        self.viewModel = EventViewCellViewModel(event)
         self.eventImageView.image = nil
-        guard let e = event else { return }
-        if let title = e.title {
-            titleLabel.text = title
-            venueLabel.text = e.venue?.displayLocation
-            timeLabel.text = e.getEventTiming()
-            self.setUpEventImage(event: e)
-        }
+        titleLabel.text = viewModel?.getEventTitle()
+        venueLabel.text = viewModel?.getVenueLocation()
+        timeLabel.text = viewModel?.getEventTiming()
+        self.bindViewModel()
+        viewModel?.fetchCellImage()
     }
     
-    private func setUpEventImage(event: Event) {
-        guard let imageURL = event.eventImageURL() else { return }
-        Task {
-            do {
-                self.eventImageView.image = try await self.viewModel?.loadImage(for: imageURL)
-            } catch {
-                self.eventImageView.image = UIImage(named: "placeholder")
-            }
-        }
+    private func bindViewModel() {
+        viewModel?.$cellImage
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.image, on: eventImageView)
+            .store(in: &cancellables)
     }
 }

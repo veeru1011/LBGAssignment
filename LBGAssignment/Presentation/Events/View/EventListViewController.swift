@@ -8,7 +8,10 @@
 import UIKit
 import Combine
 
-final class EventListViewController: BaseViewController {
+protocol EventListViewModelable {
+    var viewModel: EventListViewModel! { set get }
+}
+final class EventListViewController: BaseViewController , EventListViewModelable {
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -26,7 +29,8 @@ final class EventListViewController: BaseViewController {
     private var refreshControl: UIRefreshControl!
     
     ///View Model
-    private var viewModel: EventListViewModel!
+    var viewModel: EventListViewModel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +55,7 @@ final class EventListViewController: BaseViewController {
         tableView.estimatedRowHeight = 100
         tableView.accessibilityIdentifier = AccessibilityIdentifier.eventTableView
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.registerClass(EventViewCell.self)
+        tableView.register(UINib(nibName: EventViewCell.identifier, bundle: nil), forCellReuseIdentifier: EventViewCell.identifier)
     }
     
     private func bindUIwithViewModel() {
@@ -106,7 +110,7 @@ final class EventListViewController: BaseViewController {
     }
     
 }
-
+// MARK: UITableViewDelegate,UITableViewDataSource
 // MARK: UITableViewDelegate,UITableViewDataSource
 extension EventListViewController : UITableViewDelegate, UITableViewDataSource {
     
@@ -115,9 +119,13 @@ extension EventListViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(EventViewCell.self, indexPath: indexPath)
-        let event = self.viewModel.getItemAtIndex(indexPath.row)
-        cell.configure(event, viewModel: EventViewCellViewModel())
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: EventViewCell.identifier, for: indexPath) as? EventViewCell else {
+            assertionFailure("Cannot dequeue reusable cell")
+            return UITableViewCell()
+        }
+        if let event = self.viewModel.getItemAtIndex(indexPath.row) {
+            cell.configure(event)
+        }
         return cell
     }
     

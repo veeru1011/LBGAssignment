@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 protocol Coordinator {
-    var navigationController: UINavigationController? { get set }
     func setUpInitialNavigationController() -> UINavigationController
     func navigateToEventDetails(_ event: Event)
 }
@@ -23,15 +22,18 @@ final class AppCoordinator: Coordinator {
     }
     
     func setUpInitialNavigationController() -> UINavigationController {
-        let vc = EventListViewController.loadVC(with: EventListViewModel(getEventUseCase: makeEventUseCase()), coodinator: self)
-        navigationController = UINavigationController(rootViewController: vc)
+        let viewController = NavigationCoordinator.eventList.getViewController(self)
+        navigationController = UINavigationController(rootViewController: viewController)
         return navigationController!
     }
     
     func navigateToEventDetails(_ event: Event) {
-        let eventDetailViewModel = EventDetailViewModel(event)
-        let vc = EventDetailViewController.loadVC(with: eventDetailViewModel)
-        navigationController?.pushViewController(vc, animated: true)
+        let vc = NavigationCoordinator.eventDetail(event).getViewController(self)
+        self.pushViewController(vc)
+    }
+    
+    private func pushViewController(_ viewcontroller:UIViewController) {
+        navigationController?.pushViewController(viewcontroller, animated: true)
     }
     /// setUp App
     private func setupAppearance() {
@@ -42,21 +44,5 @@ final class AppCoordinator: Coordinator {
         appearance.backgroundColor = UIColor(red: 37/255.0, green: 37/255.0, blue: 37.0/255.0, alpha: 1.0)
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
-    }
-    
-}
-
-extension AppCoordinator {
-    // MARK: - Use Cases
-    func makeEventUseCase() -> GetEventUseCase {
-        return DefaultGetEventUseCase(eventRepository: makeEventsRepository())
-    }
-    
-    // MARK: - Repositories
-    func makeEventsRepository() -> EventsRepository {
-        let sessionManager = DefaultNetworkSessionManager()
-        let netWorkService = DefaultNetworkService(sessionManager: sessionManager)
-        let dataTransferService = DefaultDataTransferService(with: netWorkService)
-        return DefaultEventsRepository(dataTransferService: dataTransferService)
     }
 }

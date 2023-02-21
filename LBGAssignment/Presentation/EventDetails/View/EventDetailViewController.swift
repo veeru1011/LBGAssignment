@@ -6,17 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 final class EventDetailViewController: BaseViewController {
     
-    ///class function to get EventDetailViewController object from main Storyboard
-    
-    static func loadVC(with viewModel: EventDetailViewModel) -> EventDetailViewController {
-        let vc = EventDetailViewController.instantiate(storyboard: .main) as! EventDetailViewController
-        vc.viewModel = viewModel
-        return vc
-    }
-    
+    private var cancellables = Set<AnyCancellable>()
     //MARK: IBOutlet Properties
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var venueLabel: UILabel!
@@ -24,8 +18,8 @@ final class EventDetailViewController: BaseViewController {
     @IBOutlet weak private var eventImageView: UIImageView!
     
     /// Set event model for display data in this detailview
-    private var viewModel: EventDetailViewModel?
-        
+    var viewModel: EventDetailViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Detail"
@@ -38,18 +32,16 @@ final class EventDetailViewController: BaseViewController {
             self.titleLabel.text = viewModel.getEventTitle()
             self.venueLabel.text = viewModel.getVenueLocation()
             timeLabel.text = viewModel.getEventTiming()
-            self.setUpEventImage()
+            self.bindViewModel()
+            self.viewModel?.fetchImage()
+            
         }
         view.accessibilityIdentifier = AccessibilityIdentifier.eventDetailsView
     }
-    
-    private func setUpEventImage() {
-        Task {
-            do {
-                self.eventImageView.image =  try await self.viewModel?.loadEventImage()
-            } catch {
-                self.eventImageView.image = UIImage(named: "placeholder")
-            }
-        }
+    private func bindViewModel() {
+        viewModel?.$cellImage
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.image, on: eventImageView)
+            .store(in: &cancellables)
     }
 }

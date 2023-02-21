@@ -7,7 +7,12 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+protocol baseVC {
+    func loadViewController()
+}
+class BaseViewController: UIViewController , baseVC {
+    func loadViewController() { }
+    
     
     // MARK: - Properties
     var activityIndicator: UIActivityIndicatorView?

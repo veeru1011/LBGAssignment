@@ -28,20 +28,33 @@ enum HttpStatusCode: Int {
 class ImageLoader {
     static var shared = ImageLoader()
     private var cache = NSCache<NSString, UIImage>()
+    private var networkSessionManager : NetworkSessionManager
     
-    func loadImage(for url: URL) async throws -> UIImage {
+    private init() {
+        self.networkSessionManager = DefaultNetworkSessionManager()
+    }
+    
+    func updateNetworkSessionManager(_ sessionManager : NetworkSessionManager) {
+        self.networkSessionManager = sessionManager
+    }
+    
+    func loadImage(for url:URL,completion: @escaping (Result<Data?, Error>) -> Void) {
         if let cachedImage = self.getCachedImage(for: url) {
-            return cachedImage
+            completion(.success(cachedImage.pngData()))
         }
-        let (data, response) = try await URLSession.shared.data(from: url, delegate: nil)
-        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == HttpStatusCode.success.rawValue else {
-            throw APIError.badRequest
+        let request = URLRequest(url: url)
+        self.networkSessionManager.request(request) { data, response, error in
+            if let requestError = error {
+                completion(.failure(requestError))
+            } else {
+                guard let rawData = data , let image = UIImage(data: rawData) else {
+                    completion(.failure(NSError(domain: "", code: NSURLErrorDataNotAllowed, userInfo: nil)))
+                    return
+                }
+                self.cacheImage(image, for: url)
+                completion(.success(data))
+            }
         }
-        guard let image = UIImage(data: data) else {
-            throw APIError.dataError
-        }
-        self.cacheImage(image, for: url)
-        return image
     }
     
     

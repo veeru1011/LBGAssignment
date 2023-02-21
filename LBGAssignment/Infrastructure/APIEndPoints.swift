@@ -11,4 +11,9 @@ struct APIEndpoints {
     static func getEvents() -> Endpoint<EventsResponseDTO> {
         return Endpoint(path: "events")
     }
+    
+    static func getImageEndPoint(path: String) -> Endpoint<Data> {
+        return Endpoint(path: path)
+    }
+    
 }

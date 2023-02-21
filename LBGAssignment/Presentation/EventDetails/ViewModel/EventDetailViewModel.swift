@@ -6,19 +6,15 @@
 //
 
 import UIKit
+import Combine
 
 class EventDetailViewModel {
     var event: Event
+    var eventUrlString : String
+    @Published var cellImage: UIImage? = nil
     init(_ event: Event) {
         self.event = event
-    }
-    func loadEventImage() async throws -> UIImage {
-        if let imageURL = event.eventImageURL() {
-            return try await ImageLoader.shared.loadImage(for: imageURL)
-        }
-        else {
-            return UIImage(named: "placeholder") ?? UIImage()
-        }
+        self.eventUrlString = event.eventImageURL()?.absoluteString ?? ""
     }
     
     func getEventTitle() -> String? {
@@ -30,5 +26,23 @@ class EventDetailViewModel {
     
     func getEventTiming() -> String? {
         event.getEventTiming()
+    }
+    
+    func fetchImage() {
+        if let imageURL = event.eventImageURL() {
+            ImageLoader.shared.loadImage(for: imageURL) { [weak self] result in
+                guard let self = self else { return }
+                guard self.eventUrlString == imageURL.absoluteString else { return }
+                if case let .success(data) = result, let rawData = data {
+                    self.cellImage = UIImage(data: rawData)
+                }
+                else {
+                    self.cellImage = UIImage(named: "placeholder")
+                }
+            }
+        }
+        else {
+            self.cellImage = UIImage(named: "placeholder")
+        }
     }
 }
