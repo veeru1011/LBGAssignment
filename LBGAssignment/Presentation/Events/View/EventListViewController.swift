@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class EventListViewController: UIViewController {
+final class EventListViewController: BaseViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -22,17 +22,11 @@ final class EventListViewController: UIViewController {
     ///tableview object connect to IBOutlet
     @IBOutlet weak private var tableView: UITableView!
     
-    ///ActivityIndicator object connect to IBOutlet
-    @IBOutlet weak private var activityIndicater: UIActivityIndicatorView!
-    
     ///UIRefreshControl
     private var refreshControl: UIRefreshControl!
     
     ///View Model
     private var viewModel: EventListViewModel!
-    
-    ///Coordinator
-    private var coordinator: Coordinator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +72,7 @@ final class EventListViewController: UIViewController {
         viewModel?.$isLoading
             .receive(on: DispatchQueue.main)
             .sink { [weak self] loading in
-                loading ? self?.activityIndicater.startAnimating() : self?.activityIndicater.stopAnimating()
+                loading ? self?.startIndicator() : self?.stopIndicator()
             }.store(in: &cancellables)
     }
     
@@ -130,6 +124,6 @@ extension EventListViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let event = self.viewModel.getItemAtIndex(indexPath.row) else { return }
-        coordinator.navigateToEventDetails(event)
+        coordinator?.navigateToEventDetails(event)
     }
 }

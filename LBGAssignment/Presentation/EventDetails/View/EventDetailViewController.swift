@@ -7,14 +7,13 @@
 
 import UIKit
 
-final class EventDetailViewController: UIViewController {
+final class EventDetailViewController: BaseViewController {
     
     ///class function to get EventDetailViewController object from main Storyboard
     
-    static func loadVC(with viewModel: EventDetailViewModel, coodinator: Coordinator) -> EventDetailViewController {
+    static func loadVC(with viewModel: EventDetailViewModel) -> EventDetailViewController {
         let vc = EventDetailViewController.instantiate(storyboard: .main) as! EventDetailViewController
         vc.viewModel = viewModel
-        vc.coordinator = coodinator
         return vc
     }
     
@@ -26,10 +25,7 @@ final class EventDetailViewController: UIViewController {
     
     /// Set event model for display data in this detailview
     private var viewModel: EventDetailViewModel?
-    
-    ///Coordinator
-    private var coordinator: Coordinator!
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Detail"

@@ -24,24 +24,17 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="qcy-NB-Fc0"/>
                                 </connections>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="DBl-UW-wh2">
-                                <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
-                                <color key="color" red="0.20378032330000001" green="0.26942521330000002" blue="0.3225154281" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Kp4-Zd-B0k" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="2lc-AZ-Tw8"/>
-                            <constraint firstItem="DBl-UW-wh2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="80K-T2-EK2"/>
                             <constraint firstAttribute="trailing" secondItem="Kp4-Zd-B0k" secondAttribute="trailing" id="Gll-55-bn3"/>
                             <constraint firstItem="Kp4-Zd-B0k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZlM-pv-4Nt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Kp4-Zd-B0k" secondAttribute="bottom" id="bH5-VU-VHb"/>
-                            <constraint firstItem="DBl-UW-wh2" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="gLf-iW-9LF"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="activityIndicater" destination="DBl-UW-wh2" id="ry3-XU-y0i"/>
                         <outlet property="tableView" destination="Kp4-Zd-B0k" id="BhP-aV-g86"/>
                     </connections>
                 </viewController>
