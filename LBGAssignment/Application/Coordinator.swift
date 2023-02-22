@@ -15,7 +15,7 @@ protocol Coordinator {
 
 final class AppCoordinator: Coordinator {
     
-    var navigationController: UINavigationController?
+    private var navigationController: UINavigationController?
     
     init() {
         setupAppearance()
