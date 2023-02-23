@@ -33,7 +33,7 @@ private class EventsRepositoryMockService : EventsRepository {
     }
     
     func fetchEvents(completion: @escaping (Result<Events, Error>) -> Void) {
-        let endPoint = Endpoint<Events>(path: "http://mock.endpoint.com")
+        let endPoint = Endpoint<Events>(path: "http://mock.endpoint.com", method: .get)
         self.dataTransferService.request(with: endPoint) { result in
             switch result {
             case .success(let response):

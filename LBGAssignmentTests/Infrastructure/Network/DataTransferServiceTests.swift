@@ -21,7 +21,7 @@ final class DataTransferServiceTests: XCTestCase {
         let networkService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: nil, data: responseData, error: nil))
         let dts = DefaultDataTransferService(with: networkService)
         
-        dts.request(with: Endpoint<DummyModel>(path: "http://mock.endpoint.com")) { result in
+        dts.request(with: Endpoint<DummyModel>(path: "http://mock.endpoint.com", method: .get)) { result in
             do {
                 let object = try result.get()
                 XCTAssertEqual(object.name, "Hello")
@@ -41,7 +41,7 @@ final class DataTransferServiceTests: XCTestCase {
         let networkService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: nil, data: responseData, error: nil))
         let dts = DefaultDataTransferService(with: networkService)
         
-        dts.request(with: Endpoint<DummyModel>(path: "http://mock.endpoint.com")) { result in
+        dts.request(with: Endpoint<DummyModel>(path: "http://mock.endpoint.com", method: .get)) { result in
             do {
                 _ = try result.get()
                 XCTFail("Should not happen")
@@ -64,7 +64,7 @@ final class DataTransferServiceTests: XCTestCase {
         let networkService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: response, data: nil, error: nil))
         let dts = DefaultDataTransferService(with: networkService)
         
-        dts.request(with: Endpoint<DummyModel>(path: "http://mock.endpoint.com")) { result in
+        dts.request(with: Endpoint<DummyModel>(path: "http://mock.endpoint.com", method: .get)) { result in
             do {
                 _ = try result.get()
                 XCTFail("Should not happen")

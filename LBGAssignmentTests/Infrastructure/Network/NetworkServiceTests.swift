@@ -12,6 +12,8 @@ final class NetworkServiceTests: XCTestCase {
     
     private struct EndpointMock: URLCompatible {
         var path: String
+        var method: HttpMethod
+        
         public func getUrlRequest() throws -> URLRequest {
             let url = URL(string: path)
             let request = URLRequest(url: url!)
@@ -27,7 +29,7 @@ final class NetworkServiceTests: XCTestCase {
         let expectedResponseData = "Response".data(using: .utf8)!
         let mockService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: nil, data: expectedResponseData, error: nil))
         
-        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com")) { result in
+        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com", method: .get)) { result in
             guard let responseData = try? result.get() else {
                 XCTFail("Should return proper response")
                 return
@@ -44,7 +46,7 @@ final class NetworkServiceTests: XCTestCase {
         
         let mockService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: nil, data: nil, error: cancelledError))
         
-        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com")) { result in
+        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com", method: .get)) { result in
             do {
                 _ = try result.get()
                 XCTFail("Should not happen")
@@ -69,7 +71,7 @@ final class NetworkServiceTests: XCTestCase {
         
         let mockService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: response, data: nil, error: NetworkErrorMock.someError))
         
-        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com")) { result in
+        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com", method: .get)) { result in
             do {
                 _ = try result.get()
                 XCTFail("Should not happen")
@@ -110,7 +112,7 @@ final class NetworkServiceTests: XCTestCase {
         
         let mockService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: nil, data: nil, error: notConnectedError))
         
-        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com")) { result in
+        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com", method: .get)) { result in
             do {
                 _ = try result.get()
                 XCTFail("Should not happen")
@@ -131,7 +133,7 @@ final class NetworkServiceTests: XCTestCase {
         
         let mockService = DefaultNetworkService(sessionManager: NetworkSessionManagerMock(response: nil, data: nil, error: timeOut))
         
-        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com")) { result in
+        mockService.request(endpoint: EndpointMock(path: "http://mock.test.com", method: .get)) { result in
             do {
                 _ = try result.get()
                 XCTFail("Should not happen")

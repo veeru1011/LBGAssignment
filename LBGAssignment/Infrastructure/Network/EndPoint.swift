@@ -6,21 +6,28 @@
 //
 
 import Foundation
-
+public enum HttpMethod : String {
+    case get     = "GET"
+    case post    = "POST"
+    case put     = "PUT"
+}
 public class Endpoint<R>: ResponseRequestable {
     public typealias Response = R
     
     public let path: String
+    public let method: HttpMethod
     public let dataDecoder: DataDecoder
     
-    init(path: String, decoder: DataDecoder = JSONDataDecoder()) {
+    init(path: String,method: HttpMethod, decoder: DataDecoder = JSONDataDecoder()) {
         self.path = path
         self.dataDecoder = decoder
+        self.method = method
     }
 }
 
 public protocol URLCompatible {
     var path: String { get }
+    var method: HttpMethod { get }
     func getUrlRequest() throws -> URLRequest
 }
 
@@ -43,7 +50,8 @@ extension URLCompatible {
         components?.queryItems = [URLQueryItem]()
         components?.queryItems?.append(contentsOf: [
             URLQueryItem(name: "client_id", value: APIConstants.clientID)])
-        let request = URLRequest(url: (components?.url)!)
+        var request = URLRequest(url: (components?.url)!)
+        request.httpMethod = method.rawValue
         return request
     }
 }
