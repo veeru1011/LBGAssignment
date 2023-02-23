@@ -8,7 +8,7 @@
 import XCTest
 @testable import LBGAssignment
 
-class EventListViewControllerTests: XCTestCase {
+final class EventListViewControllerTests: XCTestCase {
     
     
     private var eventListVC: EventListViewController!

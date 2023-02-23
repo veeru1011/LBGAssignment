@@ -161,6 +161,15 @@
 			path = Events;
 			sourceTree = "<group>";
 		};
+		042644B529A7B5380091DFC3 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0441219529A473DE00ACDC11 /* BaseViewController */,
+				0441219829A4BE3D00ACDC11 /* NavigationCoordinator */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		0441214829A0C07200ACDC11 /* MockData */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,12 +279,12 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		0441219529A473DE00ACDC11 /* ViewController */ = {
+		0441219529A473DE00ACDC11 /* BaseViewController */ = {
 			isa = PBXGroup;
 			children = (
 				0441219629A473F100ACDC11 /* BaseViewController.swift */,
 			);
-			path = ViewController;
+			path = BaseViewController;
 			sourceTree = "<group>";
 		};
 		0441219829A4BE3D00ACDC11 /* NavigationCoordinator */ = {
@@ -363,6 +372,7 @@
 		0486D886299DA83800C05403 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				042644B529A7B5380091DFC3 /* Utilities */,
 				0486D8C5299E6BCF00C05403 /* Events */,
 				0441216229A0F67C00ACDC11 /* EventDetails */,
 				0486D85A299DA7D600C05403 /* Main.storyboard */,
@@ -382,8 +392,6 @@
 		0486D890299DC8BA00C05403 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				0441219829A4BE3D00ACDC11 /* NavigationCoordinator */,
-				0441219529A473DE00ACDC11 /* ViewController */,
 				0441215429A0E2C500ACDC11 /* Extensions */,
 				0486D891299DC8DA00C05403 /* Constants */,
 				0441216F29A153B800ACDC11 /* Network */,

@@ -8,9 +8,9 @@
 import XCTest
 @testable import LBGAssignment
 
-class EventViewCellTests: XCTestCase {
+final class EventViewCellTests: XCTestCase {
 
-    var  tableView : UITableView!
+    private var  tableView : UITableView!
     override func setUpWithError() throws {
         tableView = UITableView()
         tableView.register(UINib(nibName: EventViewCell.identifier, bundle: nil), forCellReuseIdentifier: EventViewCell.identifier)

@@ -22,6 +22,6 @@ class DummyDataHelper {
         return Data()   // should never happen
     }
 }
-class Helpers {
+private class Helpers {
 }
 

@@ -8,7 +8,7 @@
 import XCTest
 @testable import LBGAssignment
 
-class EventListViewModelTests: XCTestCase {
+final class EventListViewModelTests: XCTestCase {
     
     private enum GetEventUseCaseError: Error {
         case someError
@@ -17,21 +17,6 @@ class EventListViewModelTests: XCTestCase {
     let events : Events = {
         Events.getDummy()!
     }()
-    
-    class EventsRepositoryServiceMock : EventsRepository {
-        var expectation: XCTestExpectation?
-        var error: Error?
-        var events : Events?
-        
-        func fetchEvents(completion: @escaping (Result<Events, Error>) -> Void) {
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                completion(.success(events!))
-            }
-            expectation?.fulfill()
-        }
-    }
     
     func testEventsLoadwithThreeEvents() throws {
         
@@ -96,3 +81,17 @@ class EventListViewModelTests: XCTestCase {
     }
 }
 
+private class EventsRepositoryServiceMock : EventsRepository {
+    var expectation: XCTestExpectation?
+    var error: Error?
+    var events : Events?
+    
+    func fetchEvents(completion: @escaping (Result<Events, Error>) -> Void) {
+        if let error = error {
+            completion(.failure(error))
+        } else {
+            completion(.success(events!))
+        }
+        expectation?.fulfill()
+    }
+}

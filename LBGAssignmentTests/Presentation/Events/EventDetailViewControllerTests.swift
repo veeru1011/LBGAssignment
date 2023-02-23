@@ -8,10 +8,10 @@
 import XCTest
 @testable import LBGAssignment
 
-class EventDetailViewControllerTests: XCTestCase {
+final class EventDetailViewControllerTests: XCTestCase {
 
-    var coordinator : AppCoordinator!
-    var nvc : UINavigationController!
+    private var coordinator : AppCoordinator!
+    private var nvc : UINavigationController!
     override func setUpWithError() throws {
         coordinator = AppCoordinator()
         nvc = UINavigationController(rootViewController: UIViewController())

@@ -8,7 +8,7 @@
 import XCTest
 @testable import LBGAssignment
 
-class NetworkServiceTests: XCTestCase {
+final class NetworkServiceTests: XCTestCase {
     
     private struct EndpointMock: URLCompatible {
         var path: String

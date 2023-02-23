@@ -9,7 +9,7 @@ import XCTest
 import Combine
 @testable import LBGAssignment
 
-class EventViewCellViewModelTests: XCTestCase {
+final class EventViewCellViewModelTests: XCTestCase {
     
     var cancellables = Set<AnyCancellable>()
     

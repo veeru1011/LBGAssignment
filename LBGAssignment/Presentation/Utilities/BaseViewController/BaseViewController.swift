@@ -7,13 +7,8 @@
 
 import UIKit
 
-protocol baseVC {
-    func loadViewController()
-}
-class BaseViewController: UIViewController , baseVC {
-    func loadViewController() { }
-    
-    
+class BaseViewController: UIViewController  {
+
     // MARK: - Properties
     var activityIndicator: UIActivityIndicatorView?
     var coordinator: Coordinator?

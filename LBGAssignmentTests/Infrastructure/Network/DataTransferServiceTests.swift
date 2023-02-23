@@ -12,7 +12,7 @@ private struct DummyModel: Decodable {
     let name: String
 }
 
-class DataTransferServiceTests: XCTestCase {
+final class DataTransferServiceTests: XCTestCase {
     
     func testResponseDataDecodableToDummyObject() {
         

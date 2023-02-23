@@ -8,9 +8,9 @@
 import UIKit
 import Combine
 
-class EventDetailViewModel {
-    var event: Event
-    var eventUrlString : String
+final class EventDetailViewModel {
+    private var event: Event
+    private var eventUrlString : String
     @Published var cellImage: UIImage? = nil
     init(_ event: Event) {
         self.event = event
