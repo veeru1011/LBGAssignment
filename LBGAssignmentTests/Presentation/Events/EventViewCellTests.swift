@@ -19,7 +19,7 @@ class EventViewCellTests: XCTestCase {
     func testForEventViewCellLoadAndConfigur() {
         let cell = tableView.dequeueReusableCell(withIdentifier: EventViewCell.identifier, for: IndexPath(item: 0, section: 0)) as? EventViewCell
         XCTAssert(cell != nil)
-        let event = Event.getSingleEventWithDummyData()
+        let event = Event.getSingleEventWithDummyData()!
         cell?.configure(event)
     }
 

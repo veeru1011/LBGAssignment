@@ -8,7 +8,7 @@
 import Foundation
 
 struct APIEndpoints {
-    static func getEvents() -> Endpoint<EventsResponseDTO> {
+    static func getEvents() -> Endpoint<Events> {
         return Endpoint(path: "events")
     }
 }

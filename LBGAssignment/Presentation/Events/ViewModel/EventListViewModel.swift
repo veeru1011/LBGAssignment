@@ -17,7 +17,7 @@ protocol EventListViewModelAction {
 
 final class EventListViewModel {
 
-    private let getEventUseCase: GetEventUseCase
+    private let repositoryService: EventsRepository
     @Published var events: [Event] = []
     @Published var error: String? = nil
     @Published var isLoading : Bool = false
@@ -25,8 +25,8 @@ final class EventListViewModel {
     
     // MARK: - Init
 
-    init(getEventUseCase: GetEventUseCase) {
-        self.getEventUseCase = getEventUseCase
+    init(repositoryService: EventsRepository) {
+        self.repositoryService = repositoryService
     }
 
     // MARK: - Private
@@ -43,7 +43,7 @@ final class EventListViewModel {
 extension EventListViewModel : EventListViewModelAction {
     func getEvents() {
         self.isLoading = true
-        getEventUseCase.execute { result in
+        repositoryService.fetchEvents { result in
             switch result {
             case .success(let events):
                 self.appendPage(events.list ?? [])

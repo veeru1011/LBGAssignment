@@ -17,7 +17,7 @@ enum NavigationCoordinator {
         case .eventList:
             let eventListVC = EventListViewController.instantiate(storyboard: .main) as! EventListViewController
             eventListVC.coordinator = coordinator
-            eventListVC.viewModel = EventListViewModel(getEventUseCase: makeEventUseCase())
+            eventListVC.viewModel = EventListViewModel(repositoryService: makeEventsRepository())
             return eventListVC
         case .eventDetail(let event):
             let eventDetailVC = EventDetailViewController.instantiate(storyboard: .main) as! EventDetailViewController
@@ -29,16 +29,12 @@ enum NavigationCoordinator {
 }
 
 extension NavigationCoordinator {
-    // MARK: - Use Cases
-    func makeEventUseCase() -> GetEventUseCase {
-        return DefaultGetEventUseCase(eventRepository: makeEventsRepository())
-    }
     
     // MARK: - Repositories
     func makeEventsRepository() -> EventsRepository {
         let sessionManager = DefaultNetworkSessionManager()
         let netWorkService = DefaultNetworkService(sessionManager: sessionManager)
         let dataTransferService = DefaultDataTransferService(with: netWorkService)
-        return DefaultEventsRepository(dataTransferService: dataTransferService)
+        return EventsRepositoryService(dataTransferService: dataTransferService)
     }
 }

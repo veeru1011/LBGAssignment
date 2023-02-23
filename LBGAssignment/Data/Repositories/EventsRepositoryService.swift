@@ -1,5 +1,5 @@
 //
-//  DefaultEventsRepository.swift
+//  EventsRepositoryService.swift
 //  LBGAssignment
 //
 //  Created by mac on 16/02/23.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 
-final class DefaultEventsRepository {
+final class EventsRepositoryService {
 
     private let dataTransferService: DataTransferService
 
@@ -18,13 +18,12 @@ final class DefaultEventsRepository {
     }
 }
 
-extension DefaultEventsRepository : EventsRepository {
+extension EventsRepositoryService : EventsRepository {
     func fetchEvents(completion: @escaping (Result<Events, Error>) -> Void) {
         let getEvent = APIEndpoints.getEvents()
         self.dataTransferService.request(with: getEvent) { result in
             switch result {
-            case .success(let responseDTO):
-                let response : Events = responseDTO.toDomain()
+            case .success(let response):
                 completion(.success(response))
             case .failure(let error):
                 completion(.failure(error))

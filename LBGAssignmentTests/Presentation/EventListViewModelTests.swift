@@ -15,18 +15,19 @@ class EventListViewModelTests: XCTestCase {
     }
     
     let events : Events = {
-        Events(list: [Event.getDummy(1),Event.getDummy(2),Event.getDummy(3)])
+        Events.getDummy()!
     }()
     
-    class GetEventUseCaseMock: GetEventUseCase {
+    class EventsRepositoryServiceMock : EventsRepository {
         var expectation: XCTestExpectation?
         var error: Error?
-        var events = Events(list: nil)
-        func execute(completion: @escaping (Result<Events, Error>) -> Void) {
+        var events : Events?
+        
+        func fetchEvents(completion: @escaping (Result<Events, Error>) -> Void) {
             if let error = error {
                 completion(.failure(error))
             } else {
-                completion(.success(events))
+                completion(.success(events!))
             }
             expectation?.fulfill()
         }
@@ -34,21 +35,21 @@ class EventListViewModelTests: XCTestCase {
     
     func testEventsLoadwithThreeEvents() throws {
         
-        let getEventUseCaseMock = GetEventUseCaseMock()
-        getEventUseCaseMock.expectation = self.expectation(description: "contains three events")
-        getEventUseCaseMock.events = events
-        let viewModel = EventListViewModel(getEventUseCase: getEventUseCaseMock)
+        let repositoryServiceMock = EventsRepositoryServiceMock()
+        repositoryServiceMock.expectation = self.expectation(description: "contains three events")
+        repositoryServiceMock.events = events
+        let viewModel = EventListViewModel(repositoryService: repositoryServiceMock)
         viewModel.getEvents()
         waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertEqual(viewModel.events.count, 3)
+        XCTAssertEqual(viewModel.events.count, 2)
         XCTAssertNotNil(viewModel.events[0].getEventTiming)
     }
     
     func testForSomeError() {
-        let getEventUseCaseMock = GetEventUseCaseMock()
-        getEventUseCaseMock.expectation = self.expectation(description: "some errors")
-        getEventUseCaseMock.error = GetEventUseCaseError.someError
-        let viewModel = EventListViewModel(getEventUseCase: getEventUseCaseMock)
+        let repositoryServiceMock = EventsRepositoryServiceMock()
+        repositoryServiceMock.expectation = self.expectation(description: "some errors")
+        repositoryServiceMock.error = GetEventUseCaseError.someError
+        let viewModel = EventListViewModel(repositoryService: repositoryServiceMock)
         viewModel.getEvents()
         
         waitForExpectations(timeout: 5, handler: nil)
@@ -57,25 +58,25 @@ class EventListViewModelTests: XCTestCase {
     
     func testEventsRefresh() throws {
         
-        let getEventUseCaseMock = GetEventUseCaseMock()
+        let repositoryServiceMock = EventsRepositoryServiceMock()
         let expectation = self.expectation(description: "contains three events after refresh")
         expectation.expectedFulfillmentCount = 2
-        getEventUseCaseMock.expectation = expectation
-        getEventUseCaseMock.events = events
-        let viewModel = EventListViewModel(getEventUseCase: getEventUseCaseMock)
+        repositoryServiceMock.expectation = expectation
+        repositoryServiceMock.events = events
+        let viewModel = EventListViewModel(repositoryService: repositoryServiceMock)
         viewModel.getEvents()
         viewModel.refresh()
-        XCTAssertEqual(viewModel.events.count, 3)
+        XCTAssertEqual(viewModel.events.count, 2)
         XCTAssertNotNil(viewModel.getItemAtIndex(0)?.getEventTiming)
         
         wait(for: [expectation], timeout: 5)
     }
     
     func testForNotNetworkError() throws {
-        let getEventUseCaseMock = GetEventUseCaseMock()
-        getEventUseCaseMock.expectation = self.expectation(description: "notConnected errors")
-        getEventUseCaseMock.error = DataTransferError.networkFailure(NetworkError.notConnected)
-        let viewModel = EventListViewModel(getEventUseCase: getEventUseCaseMock)
+        let repositoryServiceMock = EventsRepositoryServiceMock()
+        repositoryServiceMock.expectation = self.expectation(description: "notConnected errors")
+        repositoryServiceMock.error = DataTransferError.networkFailure(NetworkError.notConnected)
+        let viewModel = EventListViewModel(repositoryService: repositoryServiceMock)
         viewModel.getEvents()
         
         waitForExpectations(timeout: 5, handler: nil)
@@ -83,11 +84,11 @@ class EventListViewModelTests: XCTestCase {
     }
     
     func testForGenricNetworkError() throws {
-        let getEventUseCaseMock = GetEventUseCaseMock()
-        getEventUseCaseMock.expectation = self.expectation(description: "generic network errors")
+        let repositoryServiceMock = EventsRepositoryServiceMock()
+        repositoryServiceMock.expectation = self.expectation(description: "generic network errors")
         let error = NSError(domain: "network", code: NSURLErrorCancelled, userInfo: nil)
-        getEventUseCaseMock.error = DataTransferError.networkFailure(NetworkError.generic(error))
-        let viewModel = EventListViewModel(getEventUseCase: getEventUseCaseMock)
+        repositoryServiceMock.error = DataTransferError.networkFailure(NetworkError.generic(error))
+        let viewModel = EventListViewModel(repositoryService: repositoryServiceMock)
         viewModel.getEvents()
         
         waitForExpectations(timeout: 5, handler: nil)

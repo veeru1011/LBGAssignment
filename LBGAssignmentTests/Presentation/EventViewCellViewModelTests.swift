@@ -14,7 +14,7 @@ class EventViewCellViewModelTests: XCTestCase {
     var cancellables = Set<AnyCancellable>()
     
     func testForEventDisplayDescription() throws {
-        let event = Event.getSingleEventWithDummyData()
+        let event = Event.getSingleEventWithDummyData()!
         let viewModel = EventViewCellViewModel(event)
         XCTAssertNotNil(viewModel.getEventTitle())
         XCTAssertNotNil(viewModel.getVenueLocation())
@@ -27,7 +27,7 @@ class EventViewCellViewModelTests: XCTestCase {
         let expectedImage = "image data".data(using: .utf8)!
         let manager = NetworkSessionManagerMock(response: nil, data: expectedImage, error: nil)
         ImageLoader.shared.updateNetworkSessionManager(manager)
-        let event = Event.getDummy(1)
+        let event = Event.getDummy(1)!
         let viewModel = EventViewCellViewModel(event)
         
         var expectationCount = 0
@@ -55,7 +55,7 @@ class EventViewCellViewModelTests: XCTestCase {
     func testForRealImageData() throws {
         let expectation = self.expectation(description: "image download success")
         expectation.expectedFulfillmentCount = 2
-        let event = Event.getSingleEventWithDummyData()
+        let event = Event.getSingleEventWithDummyData()!
         let viewModel = EventViewCellViewModel(event)
         
         var expectationCount = 0

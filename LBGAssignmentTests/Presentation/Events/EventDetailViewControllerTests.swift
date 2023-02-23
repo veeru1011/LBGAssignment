@@ -18,20 +18,20 @@ class EventDetailViewControllerTests: XCTestCase {
     }
     
     func testForLoadingDetailVC() throws {
-        let event = Event.getSingleEventWithDummyData()
+        let event = Event.getSingleEventWithDummyData()!
         coordinator.navigateToEventDetails(event)
     }
     
     func testForLoadingDetailVCAlone() throws {
         let expectation = self.expectation(description: "list view loaded ")
-        let event = Event.getSingleEventWithDummyData()
+        let event = Event.getSingleEventWithDummyData()!
         let detailVC = NavigationCoordinator.eventDetail(event).getViewController(coordinator)
         nvc.pushViewController(detailVC, animated: false)
         detailVC.loadViewIfNeeded()
         XCTAssertEqual(nvc.viewControllers.count, 2)
         XCTAssertEqual(detailVC.isViewLoaded, true)
         expectation.fulfill()
-        wait(for: [expectation], timeout: 20)
+        waitForExpectations(timeout: 20, handler: nil)
     }
 
 }
